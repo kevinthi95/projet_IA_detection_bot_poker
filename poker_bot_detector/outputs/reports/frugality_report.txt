@@ -1,0 +1,113 @@
+RAPPORT DE FRUGALITÉ ET DE COMPLEXITÉ DU SYSTÈME
+
+1. Données utilisées
+
+Nombre de joueurs analysés : 2000
+Nombre d'humains : 1900
+Nombre de bots : 100
+Ratio de bots : 5.00%
+Nombre de mains préflop simulées : 139509
+Nombre moyen de mains par joueur : 69.75
+Nombre de variables utilisées par le modèle supervisé : 32
+Nombre de variables utilisées par le modèle non supervisé : 6
+
+Taille du dataset joueurs : 957.25 KB
+Taille du dataset mains : 38.46 MB
+Taille totale des datasets : 39.39 MB
+
+Variables utilisées par Random Forest :
+- vpip
+- pfr
+- af
+- action_entropy
+- decision_time_mean
+- decision_time_std
+- bet_size_mean
+- bet_size_std
+- gto_similarity
+- gto_deviation_rate
+- mean_gto_action_probability
+- mean_l1_gto_distance
+- std_l1_gto_distance
+- avg_hand_strength
+- weak_hand_play_rate
+- trash_hand_vpip
+- premium_hand_play_rate
+- strong_hand_aggression_rate
+- marginal_hand_error_rate
+- gto_fold_follow_rate
+- gto_call_follow_rate
+- gto_raise_follow_rate
+- open_raise_accuracy
+- defense_accuracy
+- threebet_accuracy
+- blind_defense_rate
+- blind_defense_accuracy
+- sb_steal_attempt_rate
+- pot_odds_call_accuracy
+- hands_played
+- sessions_played
+- fatigue_slope
+
+Variables utilisées par Isolation Forest :
+- decision_time_mean
+- decision_time_std
+- bet_size_std
+- gto_similarity
+- mean_l1_gto_distance
+- trash_hand_vpip
+
+2. Modèle supervisé : Random Forest
+
+Rôle : apprendre à distinguer humains et bots avec la colonne is_bot.
+Nombre d'arbres : 100
+Profondeur maximale : 6
+Lignes utilisées pour l'entraînement : environ 1600
+Temps d'entraînement mesuré : 0.1922 secondes
+Taille du modèle sauvegardé : 193.02 KB
+Complexité indicative : O(nombre_arbres × lignes_train × variables × profondeur_max)
+Estimation pédagogique : Environ 30 720 000 opérations indicatives
+
+3. Modèle non supervisé : Isolation Forest
+
+Rôle : détecter les comportements anormaux sans utiliser is_bot pendant l'entraînement.
+Nombre d'arbres : 100
+Max samples : 256
+Variables utilisées : 6
+Temps d'entraînement mesuré : 0.5987 secondes
+Taille du modèle sauvegardé : 1.05 MB
+Complexité indicative : O(nombre_arbres × max_samples × log2(max_samples) × variables_non_supervisées)
+Estimation pédagogique : Environ 1 228 800 opérations indicatives
+
+4. Taille des livrables générés
+
+Taille totale des modèles : 1.24 MB
+Taille totale des rapports : 5.25 KB
+Taille totale des figures : 126.21 KB
+Taille totale du dossier outputs : 1.37 MB
+Nombre de fichiers générés dans outputs : 11
+
+5. Synthèse frugalité
+
+Temps total d'entraînement mesuré : 0.7909 secondes
+Verdict : IA frugale
+
+Le projet respecte une logique d'IA frugale pour plusieurs raisons :
+- les données sont tabulaires et agrégées, sans image, audio ou vidéo lourde ;
+- les modèles sont classiques : Random Forest et Isolation Forest ;
+- aucun modèle de deep learning n'est utilisé ;
+- aucun entraînement GPU n'est nécessaire ;
+- le modèle non supervisé utilise seulement les variables les plus pertinentes ;
+- les fichiers générés restent légers et faciles à inspecter.
+
+6. Limites de l'analyse
+
+Ces mesures donnent un ordre de grandeur local : elles dépendent de la machine,
+du système d'exploitation et des processus actifs au moment de l'exécution.
+La complexité indiquée reste volontairement pédagogique : scikit-learn optimise
+certaines opérations en interne, donc le nombre d'opérations estimé ne doit pas
+être lu comme une mesure exacte.
+
+Conclusion : le système est cohérent avec un projet étudiant d'IA frugale. Il
+produit une détection exploitable sans architecture lourde, avec des modèles
+rapides, interprétables et peu coûteux en stockage.

@@ -1,0 +1,42 @@
+
+ÉVALUATION DU MODÈLE NON SUPERVISÉ - ISOLATION FOREST
+
+Rappel important :
+Le modèle n'utilise pas la colonne is_bot pendant l'entraînement.
+Il s'est basé uniquement sur les 6 variables d'élite suivantes :
+decision_time_mean, decision_time_std, bet_size_std, gto_similarity, mean_l1_gto_distance, trash_hand_vpip
+
+Accuracy : 0.9830
+Precision : 0.8300
+Recall : 0.8300
+F1-score : 0.8300
+
+Rapport détaillé :
+
+              precision    recall  f1-score   support
+
+      Humain       0.99      0.99      0.99      1900
+ Bot/Suspect       0.83      0.83      0.83       100
+
+    accuracy                           0.98      2000
+   macro avg       0.91      0.91      0.91      2000
+weighted avg       0.98      0.98      0.98      2000
+
+
+Répartition réelle humains/bots par prédiction Isolation Forest :
+
+is_bot                   0   1
+isolation_prediction          
+-1                      17  83
+ 1                    1883  17
+
+Convention :
+- isolation_prediction = 1  : profil considéré normal
+- isolation_prediction = -1 : profil considéré anomalie/suspect
+
+Répartition des niveaux de risque :
+
+risk_level
+low       1700
+medium     200
+high       100
